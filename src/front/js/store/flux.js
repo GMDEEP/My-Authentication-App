@@ -33,6 +33,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
+
+			logout: () => {
+				setStore({ authToken: null });
+			},
+
 			loginUser: (email, password) => {
 				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
