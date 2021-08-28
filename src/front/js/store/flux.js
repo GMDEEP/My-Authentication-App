@@ -41,7 +41,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(resp => resp.json())
+					.then(resp => {
+						if (resp.status !== 200) {
+							throw new Error(resp.data);
+						}
+
+						return resp.json();
+					})
 					.then(data => setStore({ authToken: data.token, authError: null }))
 					.catch(error => setStore({ authToken: null, authError: error }));
 			}
