@@ -9,7 +9,14 @@ export function LoginUser() {
 	return (
 		<div className="container">
 			<div className="form-floating mb-3">
-				<input type="email" className="form-control" placeholder="name@example.com" />
+				<input
+					type="email"
+					className="form-control"
+					placeholder="name@example.com"
+					value={email}
+					onChange={ev => setEmail(ev.target.value)}
+				/>
+
 				<label htmlFor="floatingInput">Email address</label>
 			</div>
 			<div className="form-floating">
