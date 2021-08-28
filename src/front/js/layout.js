@@ -11,6 +11,7 @@ import { LoginUser } from "./pages/loginuser";
 import { RegisterUser } from "./pages/registerUser";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { SecurePage } from "./component/securePage";
 
 //create your first component
 const Layout = () => {
@@ -34,7 +35,9 @@ const Layout = () => {
 							<LoginUser />
 						</Route>
 						<Route exact path="/dashboard">
-							<Dashboard />
+							<SecurePage>
+								<Dashboard />
+							</SecurePage>
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
