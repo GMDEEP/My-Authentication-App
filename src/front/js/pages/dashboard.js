@@ -8,7 +8,7 @@ export function Dashboard() {
 		<div className="container">
 			<h2>Dashboard</h2>
 			<button className="btn btn-outline-primary" onClick={() => actions.logout()}>
-				Session Exit
+				Log Out
 			</button>
 		</div>
 	);
