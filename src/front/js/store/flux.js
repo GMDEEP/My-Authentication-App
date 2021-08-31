@@ -34,6 +34,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
+			registerUser: (email, password) => {
+				fetch(process.env.BACKEND_URL + "/api/register", {
+					method: "POST",
+					mode: "cors",
+					body: JSON.stringify({ email, password }),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(resp => {
+						if (resp.status !== 204) {
+							throw new Error("register-error");
+						}
+
+						getActions().loginUser(email, password);
+					})
+					.catch(error => setStore({ authError: error, authToken: null }));
+			},
+
 			logout: () => {
 				setStore({ authToken: null });
 			},
