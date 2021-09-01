@@ -6,12 +6,11 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from argon2 import PasswordHasher
-from flask_cors import CORS
 
 ph = PasswordHasher()
 api = Blueprint('api', __name__)
 
-CORS(api)
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -37,7 +36,6 @@ def register():
     return jsonify(response_body), 204
 
 @api.route('/login', methods=['POST'])
-
 def login():
 
     content = request.get_json()
@@ -54,14 +52,15 @@ def login():
     access_token = create_access_token(identity=user.id, additional_claims={"email":user.email})
     return jsonify({ "token": access_token, "user_id": user.id })
 
-
 @api.route('/userinfo', methods=['GET'])
 @jwt_required()
 def userinfo():
-    current_user_id= get_jwt_identity()
+    current_user_id = get_jwt_identity()
+    
     user = User.query.filter(User.id == current_user_id).first()
+    
     response_body = {
-        "message":f"Hello {user.email}!"
+        "message": f"Hello {user.email} "
     }
 
     return jsonify(response_body), 200
